@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1599754774 source:/home/elniebiet/Documents/Hackerrank/BinarySearchTrees/BST.cpp
+	<iostream>
+	<cstdlib>
+	"BST.h"
+
+1599754614 source:/home/elniebiet/Documents/Hackerrank/BinarySearchTrees/main.cpp
+	<iostream>
+	<cstdlib>
+	"BST.h"
+
+1599754614 /home/elniebiet/Documents/Hackerrank/BinarySearchTrees/BST.h
+
