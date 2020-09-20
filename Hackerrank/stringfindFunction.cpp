@@ -29,7 +29,9 @@ int main ()
   std::cout << str << '\n';
 
   string mystring = "i have a phone";
-  cout<<mystring.substr(0,4);
+  cout<<mystring.substr(3,5);
+  if(mystring.find("have", 15) != string::npos)
+    cout<<mystring.find("have", 15)<<endl;
 
   return 0;
 }

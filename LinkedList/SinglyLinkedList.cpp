@@ -95,7 +95,6 @@ void printBackwards(node_t *head){
         // After everything else is printed, print head
         cout << head->value << " - ";
     }
-
 }
 
 void printBackWards(node_t *startNode, node_t *stopNode){
