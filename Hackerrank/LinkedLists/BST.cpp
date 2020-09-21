@@ -143,6 +143,7 @@ void postOrder(node_t *root){
     cout<<root->data<<" - ";
 }
 
+
 bool isSubTreeLesser(node_t *root, int data){
     if(root == NULL)
         return true;
@@ -152,37 +153,84 @@ bool isSubTreeLesser(node_t *root, int data){
         return false;
 }
 
-bool isSubTreeGreater(node_t *root, int data){
-    if(root == NULL)
-        return true;
-    if(root->data > data && isSubTreeGreater(root->left, data) && isSubTreeGreater(root->right, data))
-        return true;
-    else
-        return false;
-}
-
-bool isBinarySearchTree(node_t *root){
-    if(root == NULL){
+bool isBinarySearchTree3(node_t *rootNode, int prev, int current){
+    if(rootNode == NULL){
         return true;
     }
-    if(isSubTreeLesser(root->left, root->data) && isSubTreeGreater(root->right, root->data)
-    && isBinarySearchTree(root->left) && isBinarySearchTree(root->right)){
-        return true;
+    isBinarySearchTree3(rootNode->left, prev, current);
+    prev = current;
+    current = rootNode->data;
+    cout<<prev<<" && "<<current<<endl;
+    if(prev > current){
+        return false;
+    }
+    //cout<<rootNode->data<<" - ";
+    isBinarySearchTree3(rootNode->right, prev, current);
+}
+
+node_t *deleteNode(node_t *rootNode, int data){
+    if(rootNode == NULL){
+        return rootNode;
+    } else if(data < rootNode->data){ //keep searching
+        deleteNode(rootNode->left, data); //keep searching
+    } else if(data > rootNode->data){
+        deleteNode(rootNode->right, data);
     } else {
-        return false;
+        //if root has only one child
+        if(rootNode->left == NULL && rootNode->right == NULL){
+            delete rootNode;
+            rootNode = NULL;
+            return rootNode;
+        } else if(rootNode->left == NULL){ //has only right child
+            node_t *temp = rootNode; //copy root
+            rootNode = rootNode->right;
+            delete temp;
+            return rootNode;
+        } else if(rootNode->right == NULL){ //has only left child
+            node_t *temp = rootNode;
+            rootNode = rootNode->left;
+            delete temp;
+            return rootNode;
+        } else { //has both left and right
+            node_t *minRight = findMinIter(rootNode->right); //findMin
+            rootNode->data = minRight->data; //set rootNodes data
+            rootNode->right = deleteNode(rootNode->right, minRight->data); //delete rightNode
+            return rootNode;
+        }
     }
 }
 
-bool isBinarySearchTree2(node_t *root, int minValue, int maxValue){
-    if(root == NULL){
-        return true;
-    }
-    if(root->data < minValue && root->data > maxValue
-    && isBinarySearchTree2(root->left, minValue, root->data)
-    && isBinarySearchTree2(root->right, root->data, maxValue)){
-        return true;
-    } else return false;
-}
+//bool isSubTreeGreater(node_t *root, int data){
+//    if(root == NULL)
+//        return true;
+//    if(root->data > data && isSubTreeGreater(root->left, data) && isSubTreeGreater(root->right, data))
+//        return true;
+//    else
+//        return false;
+//}
+//
+//bool isBinarySearchTree(node_t *root){
+//    if(root == NULL){
+//        return true;
+//    }
+//    if(isSubTreeLesser(root->left, root->data) && isSubTreeGreater(root->right, root->data)
+//    && isBinarySearchTree(root->left) && isBinarySearchTree(root->right)){
+//        return true;
+//    } else {
+//        return false;
+//    }
+//}
+//
+//bool isBinarySearchTree2(node_t *root, int minValue, int maxValue){
+//    if(root == NULL){
+//        return true;
+//    }
+//    if(root->data < minValue && root->data > maxValue
+//    && isBinarySearchTree2(root->left, minValue, root->data)
+//    && isBinarySearchTree2(root->right, root->data, maxValue)){
+//        return true;
+//    } else return false;
+//}
 
 
 int main()
@@ -219,9 +267,15 @@ int main()
     cout<<endl;
     postOrder(root);
     cout<<endl;
-    //JUST DO INORDER TRAVERSAL AND SEE IF NUMBERS ARE SEQUENTIAL
-    cout<<isBinarySearchTree(root)<<endl;
-    cout<<isBinarySearchTree2(root, 8, 14)<<endl;
+
+    //JUST DO INORDER TRAVERSAL AND SEE IF NUMBERS ARE SORTED
+//    cout<<isBinarySearchTree(root)<<endl;
+    bool resp = isBinarySearchTree3(root, 0, 0);
+    cout<<"\n\n"<<resp<<endl;
+    inOrder(root);
+    cout<<endl;
+    deleteNode(root, 9);
+    inOrder(root);
 
     return 0;
 }
