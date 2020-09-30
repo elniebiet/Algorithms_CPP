@@ -111,6 +111,7 @@ node_t *reverseListIter(node_t *headNode){
         headNode = headNode->next;
         prev1->next = prev2;
     }
+    return prev2;
 }
 
 void reverseListRecur(node_t *headNode, node_t** newHead){
@@ -172,11 +173,13 @@ int main()
     cout<<"\n";
 
     //reverse list iteratively
+    cout<<"reversing iteratively"<<endl;
     headNode = reverseListIter(headNode);
     printNodes(headNode);
     cout<<"\n";
 
     //reverse list recursively
+    cout<<"reversing recursively"<<endl;
     node_t **newHead = (node_t**)malloc(sizeof(node_t*));
     reverseListRecur(headNode, newHead);
     printNodes(*newHead);

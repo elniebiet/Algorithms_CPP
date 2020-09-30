@@ -28,10 +28,10 @@ int main ()
   str.replace(str.find(str2),str2.length(),"preposition");
   std::cout << str << '\n';
 
-  string mystring = "i have a phone";
-  cout<<mystring.substr(3,5);
-  if(mystring.find("have", 15) != string::npos)
-    cout<<mystring.find("have", 15)<<endl;
+  string mystring = "abcdefghijklmnopqrst";
+  cout<<mystring.substr(3,5)<<endl;
+  if(mystring.find("ghi", 15) != string::npos)
+    cout<<mystring.find("ghi", 0)<<endl;
 
   return 0;
 }

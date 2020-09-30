@@ -337,24 +337,26 @@ void inOrder(node_t *rootNode){
 int main()
 {
     //create root node
-    node_t *root = nullptr;
+    node_t *rootNode = nullptr;
 
-    root = insertNode(10, root);
-    cout<<root<<endl;
-    cout<<root->data<<endl;
-    root = insertNode(8, root);
-    cout<<root->data<<endl;
-    root = insertNode(15, root);
-    cout<<root->data<<endl;
-    root = insertNode(9, root);
-    cout<<root->data<<endl;
-    cout<<searchNode(10, root)<<endl;
-    node_t *minIter = findMinIter(root);
+    rootNode = insertNode(3, rootNode);
+
+    rootNode = insertNode(4, rootNode);
+    rootNode = insertNode(2, rootNode);
+    rootNode = insertNode(1, rootNode);
+    rootNode = insertNode(5, rootNode);
+    rootNode = insertNode(7, rootNode);
+    rootNode = insertNode(6, rootNode);
+    rootNode = insertNode(9, rootNode);
+    rootNode = insertNode(10, rootNode);
+
+    cout<<searchNode(10, rootNode)<<endl;
+    node_t *minIter = findMinIter(rootNode);
     cout<<minIter->data<<endl;
-    node_t *minRecur = findMinRecur(root);
+    node_t *minRecur = findMinRecur(rootNode);
     cout<<minRecur->data<<endl;
-    cout<<findHeight(root)<<endl;
+    cout<<findHeight(rootNode)<<endl;
     //invertTree(root);
-    inOrder(root);
+    inOrder(rootNode);
     return 0;
 }
