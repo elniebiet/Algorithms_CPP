@@ -350,7 +350,9 @@ int main()
     rootNode = insertNode(9, rootNode);
     rootNode = insertNode(10, rootNode);
 
-    cout<<searchNode(10, rootNode)<<endl;
+    cout<<searchNode(20, rootNode)<<endl;
+    cout<<searchNode(2, rootNode)<<endl;
+
     node_t *minIter = findMinIter(rootNode);
     cout<<minIter->data<<endl;
     node_t *minRecur = findMinRecur(rootNode);
