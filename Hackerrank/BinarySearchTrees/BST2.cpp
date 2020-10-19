@@ -132,6 +132,7 @@ void inOrderPrint(tree_t *rootNode){
         inOrderPrint(rootNode->right);
     }
 }
+
 int main()
 {
     tree_t *rootNode =  NULL;
@@ -167,5 +168,6 @@ int main()
 
     invertTree(rootNode);
     inOrderPrint(rootNode);
+
     return 0;
 }

@@ -1,28 +1,40 @@
 #include <iostream>
 #include <vector>
+#include <map>
 using namespace std;
 
 int main()
 {
-    int amount = 1950;
-    vector<int> denominations;
-    denominations.push_back(500);
-    denominations.push_back(100);
-    denominations.push_back(50);
-    denominations.push_back(10);
-    denominations.push_back(5);
-    denominations.push_back(2);
-    denominations.push_back(1);
+    int amount = 400;
+    vector<int> currencies;
 
-    int remainder = amount;
-    int i=0;
-    while(remainder != 0){
-        if(amount > denominations[i]){
-            remainder = amount % denominations[i];
-            cout<<denominations[i]<< " x "<<int(amount/denominations[i])<<endl;
-            amount = remainder;
+    currencies.push_back(500);
+    currencies.push_back(100);
+    currencies.push_back(50);
+    currencies.push_back(20);
+    currencies.push_back(10);
+    currencies.push_back(5);
+    currencies.push_back(1);
+
+    //loop through starting from the largest currency,
+    //if there is a remainder, use the next currency
+    map<int, int> numTimes;
+    while(amount > 0){
+        for(int i=0; i<currencies.size(); i++){
+            if(currencies[i] <= amount){
+                int numCurrency = amount / currencies[i];
+                numTimes.insert(make_pair(currencies[i], numCurrency));
+//                for(int k=0; k<numCurrency; k++){
+//                    cout<<currencies[i]<<" x ";
+//                }
+                amount = amount % currencies[i];
+                break;
+            }
         }
-        i++;
+    }
+
+    for(map<int, int>::iterator it = numTimes.begin(); it != numTimes.end(); it++){
+        cout<<it->first<<"("<<it->second<<" times)";
     }
     return 0;
 }
